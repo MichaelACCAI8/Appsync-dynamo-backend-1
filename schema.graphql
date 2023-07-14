@@ -1,0 +1,31 @@
+type Query {
+  getExample(id: ID!): Example
+}
+
+type Mutation {
+  createRecord(input: RecordInput!): Record
+  updateRecord(id: ID!, field1: String!, field2: Int!): Record
+  deleteItem(id: ID!): RecordDelete
+}
+
+input RecordInput {
+  field1: String!
+  field2: Int!
+}
+
+type Record {
+  id: ID!
+  field1: String!
+  field2: Int!
+}
+
+type Example {
+  id: ID!
+  name: String!
+}
+
+type RecordDelete {
+  id: ID!
+  field1: String!
+  field2: Boolean!
+}
