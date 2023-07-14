@@ -1,0 +1,5 @@
+#set($resp = {
+  "id": "$context.result.id",
+  "name": "$context.result.author"
+} )
+$util.toJson($resp)
