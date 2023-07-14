@@ -1,0 +1,16 @@
+{
+  "version" : "2017-02-28",
+  "operation" : "PutItem",
+  "key" : {
+      "id" : $util.dynamodb.toDynamoDBJson($util.autoId())
+  },
+  "attributeValues" : {
+      "author" : {"S": "$context.arguments.input.field1" },
+      "title" : $util.dynamodb.toDynamoDBJson($context.arguments.field2),
+      "content" : $util.dynamodb.toDynamoDBJson($context.arguments.content),
+      "url" : $util.dynamodb.toDynamoDBJson($context.arguments.url),
+      "ups" : { "N" : 1 },
+      "downs" : { "N" : 0 },
+      "version" : { "N" : 1 }
+  }
+}
