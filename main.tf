@@ -105,7 +105,7 @@ resource "aws_iam_policy" "appsync_dynamodb_policy" {
 EOF
 }
 
-# Resource Rol
+# Resource Role
 
 resource "aws_iam_role" "example_datasource_role" {
   name = "ExampleDataSourceRole"
