@@ -78,8 +78,34 @@ resource "aws_appsync_resolver" "delete_resolver" {
   data_source = aws_appsync_datasource.exampleDatasource.name
 }
 
+# Create IAM Policy
 
-# Resource Rol
+resource "aws_iam_policy" "appsync_dynamodb_policy" {
+  name        = "AppSyncDynamoDBPolicy"
+  description = "Policy to allow AppSync access to DynamoDB"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:Query",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem"
+      ],
+      "Resource": "${var.table_arn}"
+    }
+  ]
+}
+EOF
+}
+
+# Resource Role
 
 resource "aws_iam_role" "example_datasource_role" {
   name = "ExampleDataSourceRole"
@@ -99,6 +125,14 @@ resource "aws_iam_role" "example_datasource_role" {
 }
 EOF
 }
+
+# Assing Policy To Role
+
+resource "aws_iam_role_policy_attachment" "appsync_policy_attachment" {
+  role       = aws_iam_role.example_datasource_role.name
+  policy_arn = aws_iam_policy.appsync_dynamodb_policy.arn
+}
+
 
 # Create Data Source
 

@@ -8,13 +8,9 @@ Terraform binary
 
 ## Steps
 
-## Create Resources
+## Create Policy
 
--- Checkout in the terminal to the branch create_resources
-
-git checkout create_resources
-
-## Create Api And Data Base
+## Create Api And Data Base With IAM Policy And Assing Policy To Role
 
 -- Create a file in the root dir:
 
@@ -24,9 +20,13 @@ git checkout create_resources
 
 table_name="table1" # Enter your table name
 appsync_name="api1" # Enter your appsync name
-table_arn=""        # Enter your table name
+table_arn="" # Enter your table name
 
--- Fill the table name and the appsync name
+-- Fill the table name and the appsync name with the same name 
+that was registered in the previous branch
+
+-- Enter the aws console copy and paste the arn of the table that was 
+created and paste it in the table arn field
 
 ## Init Terraform
 
@@ -44,7 +44,4 @@ terraform plan -var-file dev.tfvars
 
 terraform apply -var-file dev.tfvars -auto-approve
 
-# Checkout to the next branch 
-
-git checkout create_database_policy
 
